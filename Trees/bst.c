@@ -45,6 +45,13 @@ struct bst* findMin(struct bst* root){
     }
     return root;
 }
+struct bst* findMax(struct bst* root){
+    while(root->right!=NULL)
+    {
+        root = root->right;
+    }
+    return root;
+}
 struct bst* deleteNode(struct bst* root, int val){
     if(root == NULL){
         return root;
@@ -72,6 +79,28 @@ struct bst* deleteNode(struct bst* root, int val){
     }
     return root;
 }
+struct bst* displayInOrder(struct bst* root){
+    if(root != NULL){
+        displayInOrder(root->left);
+        printf("%d ", root->data);
+        displayInOrder(root->right);
+    }
+}
+struct bst* displayPreOrder(struct bst* root){
+    if(root != NULL){
+        printf("%d ", root->data);
+        displayPreOrder(root->left);
+        displayPreOrder(root->right);
+    }
+}
+struct bst* displayPostOrder(struct bst* root){
+    if(root != NULL){
+        displayPostOrder(root->left);
+        displayPostOrder(root->right);
+        printf("%d ", root->data);
+    }
+}
+
 int main(){
     struct bst* root = NULL;
     root = insert(root, 50);
@@ -103,6 +132,10 @@ int main(){
     }
     int mini = findMin(root)->data;
     printf("Minimum element in the BST is: %d\n", mini);
-
+    print("Maximum element in the BST is: %d\n", findMax(root)->data);
+    insert(root, 90);
+    displayInOrder(root);
+    printf("\n");
+    print("%d", root->left->data);
     return 0;
 }
