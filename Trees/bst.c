@@ -132,10 +132,10 @@ int main(){
     }
     int mini = findMin(root)->data;
     printf("Minimum element in the BST is: %d\n", mini);
-    print("Maximum element in the BST is: %d\n", findMax(root)->data);
+    printf("Maximum element in the BST is: %d\n", findMax(root)->data);
     insert(root, 90);
     displayInOrder(root);
     printf("\n");
-    print("%d", root->left->data);
+    printf("%d", root->left->data);
     return 0;
 }
