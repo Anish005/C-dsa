@@ -56,14 +56,20 @@ struct bst* deleteNode(struct bst* root, int val){
     if(root == NULL){
         return root;
     }
-    if(val < root->data){
+    else if(val < root->data){
         root->left = deleteNode(root->left, val);
     }
     else if(val > root->data){
         root->right = deleteNode(root->right, val);
     }
     else{
-        if(root->left == NULL){
+        // Node with no child
+        if(root->left == NULL && root->right == NULL){
+            free(root);
+            return NULL;
+        }
+        // Node with only one child
+        else if(root->left == NULL){
             struct bst* temp = root->right;
             free(root);
             return temp;
@@ -73,27 +79,29 @@ struct bst* deleteNode(struct bst* root, int val){
             free(root);
             return temp;
         }
+        // Node with two children: Get the inorder successor (smallest in the right subtree)
         struct bst* temp = findMin(root->right);
         root->data = temp->data;
         root->right = deleteNode(root->right, temp->data);
+
     }
     return root;
 }
-struct bst* displayInOrder(struct bst* root){
+void displayInOrder(struct bst* root){
     if(root != NULL){
         displayInOrder(root->left);
         printf("%d ", root->data);
         displayInOrder(root->right);
     }
 }
-struct bst* displayPreOrder(struct bst* root){
+void displayPreOrder(struct bst* root){
     if(root != NULL){
         printf("%d ", root->data);
         displayPreOrder(root->left);
         displayPreOrder(root->right);
     }
 }
-struct bst* displayPostOrder(struct bst* root){
+void displayPostOrder(struct bst* root){
     if(root != NULL){
         displayPostOrder(root->left);
         displayPostOrder(root->right);
@@ -119,9 +127,14 @@ int main(){
         printf("Element not found in the BST\n");
     }
 
+    displayInOrder(root);
+    printf("\n");
     root = deleteNode(root, 20);
     root = deleteNode(root, 30);
     root = deleteNode(root, 50);
+    displayInOrder(root);
+    printf("\n");
+    printf("%d\n", root->data);
 
     searchResult = search(root, 50);
     if(searchResult != NULL){
