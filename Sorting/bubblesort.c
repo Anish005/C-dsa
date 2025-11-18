@@ -4,7 +4,7 @@ void bubble_sort1(int x[], int size){
     int t;
     for(int i =size - 1 ; i > 0 ;i--){
         for(int j = 0; j < i; j ++){
-            if(x[j] > x[j + 1]){
+            if(x[j] < x[j + 1]){
                 swap(x[j], x[j + 1], t);
             }
 
@@ -15,7 +15,7 @@ void bubble_sort2(int x[], int size){
     int t;
     for(int i =0 ; i < size - 1 ;i++){
         for(int j = 0; j < size - i - 1; j ++){
-            if(x[j] > x[j + 1]){
+            if(x[j] < x[j + 1]){
                 swap(x[j], x[j + 1], t);
             }
 

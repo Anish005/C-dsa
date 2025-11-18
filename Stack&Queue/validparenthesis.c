@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <math.h>
+#include <string.h>
 #define MAX 100
 
 // A structure to represent a stack 
@@ -10,8 +11,9 @@ struct Stack {
     int maxSize; 
     char* array; 
 }; 
+// typedef struct Stack stk;
 
-struct Stack* create(char max) 
+struct Stack* create(int max) 
 { 
     struct Stack* stack = (struct Stack*)malloc(sizeof(struct Stack)); 
     stack->maxSize = max; 
@@ -59,7 +61,7 @@ void pop(struct Stack* stack)
 } 
 
 // Function to return the top from stack without removing it 
-int peek(struct Stack* stack) 
+char peek(struct Stack* stack) 
 { 
     if (isEmpty(stack)) 
         return -9999; 
@@ -95,10 +97,17 @@ int checkBalanced(struct Stack* stack, char expr[], int len){
 }
 int main() {
   char exp[MAX] = "({})[]";
+  char exp2[MAX] = "({[})]";
+  char exp3[MAX] = "({[})";
+
 
   int len = strlen(exp);
   struct Stack* stack = create(len); 
   checkBalanced(stack, exp, len)?printf("Balanced"): printf("Not Balanced"); 
-
+    printf("\n");
+    checkBalanced(stack, exp2, strlen(exp2))?printf("Balanced"): printf("Not Balanced"); 
+    printf("\n");
+    checkBalanced(stack, exp3, strlen(exp3))?printf("Balanced"): printf("Not Balanced"); 
+    printf("\n");
   return 0;
 }
